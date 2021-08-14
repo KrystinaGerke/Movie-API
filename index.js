@@ -1,4 +1,5 @@
 const express = require('express');
+morgan = require('morgan');
 const app = express();
 
 
@@ -45,14 +46,14 @@ let topMoves = [
   },
 ];
 
+app.use(morgan('common'));
+
 // GET requests
 app.get('/', (req, res) => {
   res.send('Welcome to my movie club!');
 });
 
-app.get('/documentation', (req, res) => {                  
-  res.sendFile('public/documentation.html', { root: __dirname });
-});
+app.use(express.static('public'));
 
 app.get('/movies', (req, res) => {
   res.json(topMovies);
