@@ -1,1 +1,12 @@
-This is the log.
+This is the log.URL: /movies
+Timestamp: Tue Oct 05 2021 12:55:32 GMT-0400 (Eastern Daylight Time)
+
+URL: /movies
+Timestamp: Tue Oct 05 2021 12:57:14 GMT-0400 (Eastern Daylight Time)
+
+URL: /movies
+Timestamp: Tue Oct 05 2021 12:57:53 GMT-0400 (Eastern Daylight Time)
+
+URL: /movies
+Timestamp: Tue Oct 05 2021 12:59:08 GMT-0400 (Eastern Daylight Time)
+

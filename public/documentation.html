@@ -3,18 +3,66 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>MyFlix API</title>
+        <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
     </head>
     <body>
-        <h1>MyFlix</h1>
-        <p>To build the server-side component of a “movies” web application. The web
-            application will provide users with access to information about different
-            movies, directors, and genres. Users will be able to sign up, update their
-            personal information, and create a list of their favorite movies
-        </p> 
+      <table><thead>
+          <tr>
+              <th>request</th>
+              <th>url</th>
+              <th>response</th>
+          </tr>
+      </thead>
+    <tbody>
+        <tr>
+            <td>GET request</td>
+            <td>/movies</td>
+            <td>return array of all movies</td>
+        </tr>
+        <tr>
+            <td>GET request</td>
+            <td>/movies/:movieTitle</td>
+            <td>return movie by it's title</td>
+        </tr>
+        <tr>
+            <td>GET request</td>
+            <td>/genres/:genre</td>
+            <td>return info about a specific movie genre</td>
+        </tr>
+        <tr>
+            <td>GET request</td>
+            <td>/directors/:directorName</td>
+            <td>return info about movie directors</td>
+        </tr>
+        <tr>
+            <td>POST request</td>
+            <td>/register</td>
+            <td>register to our system</td>
+        </tr>
+        <tr>
+            <td>PUT request</td>
+            <td>/users/:ID/:infoToUpdate/:newValue</td>
+            <td>Update the persons username info</td>
+        </tr>
+        <tr>
+            <td>POST request</td>
+            <td>/users/:ID/favorites/:newFavorite</td>
+            <td>Add a movie to a specific user's profile</td>
+        </tr>
+        <tr>
+            <td>DELETE request</td>
+            <td>/users/:id/unregister</td>
+            <td>Unregister a user from the database</td>
+        </tr>
+        <tr>
+            <td>DELETE request</td>
+            <td>/users/:ID/favorites/:deleteFavorite</td>
+            <td>Delete a favorite movie from the users favorites</td>
+        </tr>
+    </tbody></table>
         
         <script src="" async defer></script>
     </body>

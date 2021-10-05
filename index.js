@@ -3,7 +3,7 @@ morgan = require('morgan');
 const app = express();
 
 
-let topMoves = [
+let topMovies = [
   {
     title: 'Dune',
     director: 'Frank Herbert'
@@ -54,10 +54,47 @@ app.get('/', (req, res) => {
 });
 
 app.use(express.static('public'));
+app.get('/documentation', (req, res) => {
+	res.sendFile('public/documentation.html', { root: __dirname });
+});
 
 app.get('/movies', (req, res) => {
   res.json(topMovies);
 });
+
+app.get('/movies/:movieTitle', (req, res) => {
+  let movie = topMovies.find(m => m.title === req.params.movieTitle)
+  res.json(movie)
+}); 
+
+app.get('/genres/:genre', (req, res) => {
+  res.send('Successful GET request of all major genres in the movie field.');
+}); 
+
+app.get('/directors/:directorName', (req, res) => {
+  res.send('Successful GET request of directors information.');
+}); 
+
+app.post('/register', (req, res) => {
+  res.send('Successful POST to the server a new users information.');
+}); 
+
+app.put('/users/:ID/:infoToUpdate/:newValue', (req, res) => {
+  res.send('Successful PUT to update users username information.');
+}); 
+
+app.post('/users/:ID/favorites/:newFavorite', (req, res) => {
+  res.send('Successful POST to the server for a new favorite movie on a specific users profile.');
+}); 
+
+app.delete('/users/:id/unregister', (req, res) => {
+  res.send('Successful DELETE to the server that removes a user from the database.');
+}); 
+
+app.delete('/users/:ID/favorites/:deleteFavorite', (req, res) => {
+  res.send('Successful DELETE of a movie from an individual users favorite list on the database.');
+}); 
+
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
