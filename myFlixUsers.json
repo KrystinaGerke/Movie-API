@@ -1,0 +1,4 @@
+{"_id":{"$oid":"616884c538e6de2bcb26f2e0"},"FavoriteMovies":["61688c7e38e6de2bcb26f2ee"],"Username":"tedTest2","Password":"tedTest2","Email":{"$date":"1985-02-19T00:00:00Z"},"__v":0.0}
+{"_id":{"$oid":"616884c538e6de2bcb26f2e1"},"Username":"sammyg","Password":"1234","Email":"sammyg@gmail.com","Birthday":{"$date":"1985-02-19T00:00:00Z"},"FavoriteMovies":[]}
+{"_id":{"$oid":"616884c538e6de2bcb26f2e3"},"username":"kent","password":"5678","email":"kent@gmail.com","Birthday":{"$date":"1985-02-19T00:00:00Z"},"FavoriteMovies":[]}
+{"_id":{"$oid":"616884c538e6de2bcb26f2e4"},"username":"stu","password":"8765","email":"stu@gmail.com","Birthday":{"$date":"1985-02-19T00:00:00Z"},"FavoriteMovies":[]}
