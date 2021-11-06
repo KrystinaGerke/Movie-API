@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Models = require('./models.js');
 const bodyParser = require('body-parser');
 
-const Movies = Models.Movie;
-const Users = Models.User;
+const Movie = Models.Movie;
+const Users = Models.Users;
 const Genres = Models.Genre;
 const Directors = Models.Directors;
 
@@ -34,16 +34,18 @@ app.get('/documentation', (req, res) => {
 
 //READ
 app.get('/movies', (req, res) => {
-  res.status(200).json(Movie);
+  Movies.find({Title:req.params.movieTitle})
+  .then(result => res.json(result))
+  .catch(e => console.error(e))
 });
 
 //READ
 app.get('/movies/:movieTitle', (req, res) => {
   const {movieTitle} = req.params;
-  const movie = movies.find(movie => movie.Title === title );
+  const movies = Movies.find(Movies => Movies.Title === title );
 
-  if (movie) {
-    res.status(200).json(movie);
+  if (movies) {
+    res.status(200).json(movies);
   } else {
     res.status(400).send('This movie is not in our database')
   }
@@ -52,7 +54,7 @@ app.get('/movies/:movieTitle', (req, res) => {
 //READ
 app.get('/genres/:genre', (req, res) => {
   const {genreName} = req.params;
-  const genre = movies.find(movie => movie.Genre.Name === genreName).Genre;
+  const genre = Movies.find(Movies => Movies.Genre.Name === genreName).Genre;
 
   if (genre) {
     res.status(200).json(genre);
