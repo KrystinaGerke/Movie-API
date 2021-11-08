@@ -175,6 +175,7 @@ app.post('/users/:ID/:movieTitle', (req, res) => {
 });
 
 //DELETE
+//removes a user from the db
 app.delete('/users/:id/unregister', (req, res) => {
   Users.findOneAndRemove({ id: req.params.id })
     .then((user) => {
@@ -192,6 +193,7 @@ app.delete('/users/:id/unregister', (req, res) => {
 
 
 //DELETE
+//deletes a favorite movie from the users favorites list
 app.delete('/users/:ID/favorites/:deleteFavorite', (req, res) => {
   Users.findOneAndUpdate({ user_name: req.params.id }, {
     $pull: { FavoriteMovies: req.params.MovieID }
@@ -208,12 +210,12 @@ app.delete('/users/:ID/favorites/:deleteFavorite', (req, res) => {
 });
 
 
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-  });
-
 // listen for requests
 app.listen(8080, () => {
   console.log('Your app is listening on port 8080.');
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
 });
