@@ -19,37 +19,47 @@
     <tbody>
         <tr>
             <td>GET request</td>
+            <td>/</td>
+            <td>return welcome to the site</td>
+        </tr>
+        <tr>
+            <td>GET request</td>
             <td>/movies</td>
-            <td>return array of all movies</td>
+            <td>Gets all information about all movies</td>
         </tr>
         <tr>
             <td>GET request</td>
-            <td>/movies/:movieTitle</td>
-            <td>return movie by it's title</td>
+            <td>/movies/:title</td>
+            <td>Gets movie by title</td>
         </tr>
         <tr>
             <td>GET request</td>
-            <td>/genres/:genre</td>
+            <td>/movies/genre/:name</td>
             <td>return info about a specific movie genre</td>
         </tr>
         <tr>
             <td>GET request</td>
-            <td>/directors/:directorName</td>
-            <td>return info about movie directors</td>
+            <td>/movies/director/:name</td>
+            <td>return info about a specific movie director</td>
+        </tr>
+        <tr>
+            <td>GET request</td>
+            <td>/users</td>
+            <td>Get all users</td>
         </tr>
         <tr>
             <td>POST request</td>
-            <td>/register</td>
+            <td>/users/:register</td>
             <td>register to our system</td>
         </tr>
         <tr>
             <td>PUT request</td>
-            <td>/users/:ID/:infoToUpdate/:newValue</td>
-            <td>Update the persons username info</td>
+            <td>/users/:ID</td>
+            <td>Update the persons user info</td>
         </tr>
         <tr>
             <td>POST request</td>
-            <td>/users/:ID/favorites/:newFavorite</td>
+            <td>/users/:ID/:movieTitle</td>
             <td>Add a movie to a specific user's profile</td>
         </tr>
         <tr>

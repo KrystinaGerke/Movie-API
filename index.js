@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
 });
 
 //READ
-//Gets all information about a movie
+//Gets all information about all movies
 app.get('/movies', (req, res) => {
   Movies.find()
     .then((movie) => {
@@ -109,7 +109,7 @@ app.get('/users', (req, res) => {
   Email: String,
   Birthday: Date
 }*/
-app.post('/users', (req, res) => {
+app.post('/users/:register', (req, res) => {
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
