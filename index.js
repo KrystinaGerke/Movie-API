@@ -22,9 +22,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //connects the auth file for log ins to connect to this file
-let auth = require('./auth')(app)
 const passport = require('passport');
 require('./passport');
+require('./auth')(app);
 
 //logs requests to server
 app.use(morgan('common'));
@@ -114,7 +114,7 @@ app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) =
   Email: String,
   Birthday: Date
 }*/
-app.post('/users/:register', (req, res) => {
+app.post('/users', (req, res) => {
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
@@ -145,10 +145,9 @@ app.post('/users/:register', (req, res) => {
 app.put('/users/:ID', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ id: req.params.id }, { $set:
     {
-      id: req.body.id,
       Password: req.body.Password,
       Email: req.body.Email,
-      birth_day: req.body.birth_day
+      Birthday: req.body.Birthday
     }
   },
   { new: true }, 
@@ -164,9 +163,9 @@ app.put('/users/:ID', passport.authenticate('jwt', { session: false }), (req, re
 
 //CREATE
 //adds a favorite movie to a specific user's profile 
-app.post('/users/:ID/:movieTitle', passport.authenticate('jwt', { session: false }), (req, res) => {
-  Users.findOneAndUpdate({ user_name: req.params.id }, {
-    $push: { FavoriteMovies: req.params.MovieID }
+app.post('/users/:ID/:movieID', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Users.findOneAndUpdate({ user_name: req.params.ID }, {
+    $push: { FavoriteMovies: req.params.movieID }
   },
   { new: true }, 
  (err, updatedUser) => {
@@ -199,7 +198,7 @@ app.delete('/users/:id/unregister', passport.authenticate('jwt', { session: fals
 
 //DELETE
 //deletes a favorite movie from the users favorites list
-app.delete('/users/:ID/favorites/:deleteFavorite', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.delete('/users/:ID/:deleteFavorite', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ user_name: req.params.id }, {
     $pull: { FavoriteMovies: req.params.MovieID }
   },
