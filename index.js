@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const app = express();
 const mongoose = require('mongoose');
 const Models = require('./models.js');
+const { check, validationResult } = require('express-validator');
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -25,6 +26,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const passport = require('passport');
 require('./passport');
 require('./auth')(app);
+
+//adding cors
+const cors = require('cors');
+app.use(cors());
 
 //logs requests to server
 app.use(morgan('common'));
@@ -114,7 +119,27 @@ app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) =
   Email: String,
   Birthday: Date
 }*/
-app.post('/users', (req, res) => {
+app.post('/users',
+  // Validation logic here for request
+  //you can either use a chain of methods like .not().isEmpty()
+  //which means "opposite of isEmpty" in plain english "is not empty"
+  //or use .isLength({min: 5}) which means
+  //minimum value of 5 characters are only allowed
+  [
+    check('Username', 'Username is required').isLength({min: 5}),
+    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail()
+  ], (req, res) => {
+
+  // check the validation object for errors
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
+  let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
@@ -123,7 +148,7 @@ app.post('/users', (req, res) => {
         Users
           .create({
             Username: req.body.Username,
-            Password: req.body.Password,
+            Password: hashedPassword,
             Email: req.body.Email,
             Birthday: req.body.Birthday
           })
@@ -215,8 +240,9 @@ app.delete('/users/:ID/:deleteFavorite', passport.authenticate('jwt', { session:
 
 
 // listen for requests
-app.listen(8080, () => {
-  console.log('Your app is listening on port 8080.');
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0',() => {
+ console.log('Listening on Port ' + port);
 });
 
 app.use((err, req, res, next) => {
