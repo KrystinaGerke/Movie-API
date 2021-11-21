@@ -51,14 +51,25 @@ app.get('/', (req, res) => {
 
 //READ
 //Gets all information about all movies
-app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
+// app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
+//   Movies.find()
+//     .then((movie) => {
+//       res.status(201).json(movie);
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//       res.status(400).send('Error: ' + err);
+//     });
+// });
+
+app.get("/movies", function (req, res) {
   Movies.find()
-    .then((movie) => {
-      res.status(201).json(movie);
+    .then(function (movies) {
+      res.status(201).json(movies);
     })
-    .catch((err) => {
-      console.error(err);
-      res.status(400).send('Error: ' + err);
+    .catch(function (error) {
+      console.error(error);
+      res.status(500).send("Error: " + error);
     });
 });
 
