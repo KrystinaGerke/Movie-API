@@ -30,7 +30,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const cors = require('cors');
 app.use(cors());
 
-
 //connects the auth file for log ins to connect to this file
 const passport = require('passport');
 require('./passport');
