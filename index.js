@@ -26,14 +26,15 @@ mongoose.connect(process.env.CONNECTION_URI, {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//adding cors
+const cors = require('cors');
+app.use(cors());
+
+
 //connects the auth file for log ins to connect to this file
 const passport = require('passport');
 require('./passport');
 require('./auth')(app);
-
-//adding cors
-const cors = require('cors');
-app.use(cors());
 
 //logs requests to server
 app.use(morgan('common'));
